@@ -109,10 +109,16 @@ const ErrorLabel = styled.span`
 const CheckboxContainer = styled.div`
     grid-column: span 12;
     margin: 24px 0;
-    display: block;
+    font-family: EuclidCircularA;
 
     input {
         color: #42494f;
+        width: 18px;
+        height: 18px;
+    }
+
+    label {
+        line-height: 18px;
     }
 `;
 
@@ -142,6 +148,9 @@ const ButtonsContainer = styled.div`
         &:hover {
             border-radius: 40px;
         }
+        &:disabled {
+            background-color: gray;
+        }
     }
 
     a {
@@ -154,6 +163,10 @@ const ButtonsContainer = styled.div`
         line-height: 16px;
         text-align: center;
         color: #001E2B;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
 `;
 
@@ -174,14 +187,12 @@ const passwordValidator = (value, _) => {
 };
 
 function Form(){  
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
 
-    const onSubmit = data => {
-        console.log(data);
+    const onSubmit = async data => {
+        await new Promise(r => setTimeout(r, 5000));
+        reset();
     }
-
-    console.log(watch("termsChecked"));
-    console.log(errors);
 
     return(
         <FormContainer>
@@ -197,7 +208,8 @@ function Form(){
                 </GoogleSignUpContainer>
 
                 <NameFieldContainer>
-                    <TextField label="FirstName" variant="filled" 
+                    <TextField label="FirstName*" variant="filled" 
+                        disabled={isSubmitting} 
                         error={!!errors.firstName}
                         {...register('firstName', { required: true })} 
                     />
@@ -206,7 +218,8 @@ function Form(){
                 </NameFieldContainer>
 
                 <NameFieldContainer>
-                    <TextField label="LastName" variant="filled" 
+                    <TextField label="LastName*" variant="filled" 
+                        disabled={isSubmitting} 
                         error={!!errors.lastName}
                         {...register('lastName', { required: true })} 
                     />
@@ -214,11 +227,15 @@ function Form(){
                 </NameFieldContainer>
 
                 <TextFiledContainer>
-                    <PlainField id="company" label="Company" variant="filled" {...register('company')} />
+                    <PlainField id="company" label="Company" variant="filled"
+                        disabled={isSubmitting} 
+                        {...register('company')} 
+                    />
                 </TextFiledContainer>
                 
                 <TextFiledContainer>
-                    <PlainField label="Email" variant="filled" 
+                    <PlainField label="Email*" variant="filled" 
+                        disabled={isSubmitting}
                         error={!!errors.email}
                         {...register('email', { required: true, pattern: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/ })} 
                     />
@@ -227,7 +244,8 @@ function Form(){
                 </TextFiledContainer>
 
                 <TextFiledContainer>
-                    <PasswordField label="Password" variant="filled" type="password" 
+                    <PasswordField label="Password*" variant="filled" type="password" 
+                        disabled={isSubmitting}
                         error={!!errors.password}
                         {...register('password', { 
                             required: true, 
@@ -240,14 +258,16 @@ function Form(){
                     {errors.password?.type === 'validate' && <ErrorLabel>at least one uppercase letter, one number, and one special character.</ErrorLabel>}
                 </TextFiledContainer>
 
-                <CheckboxContainer>                        
-                    <Checkbox id="terms-agreed" {...register('termsChecked', { required: true })} />
-                    <label>I agree to the Terms of Service and Privacy Policy.</label>
+                <CheckboxContainer>
+                    <input id="terms-checkbox" type='checkbox' {...register('termsChecked', { required: true })} />
+                    <label for="terms-checkbox">I agree to the <b>Terms of Service</b> and <b>Privacy Policy</b>.</label>
                     {errors.termsChecked?.type === 'required' && <ErrorLabel>This field is required</ErrorLabel>}
                 </CheckboxContainer>
 
                 <ButtonsContainer>                        
-                    <button type='submit'>Create your Atlas account</button>
+                    <button type='submit' disabled={isSubmitting}>
+                        { isSubmitting ? "Submitting.." : "Create your Atlas account"}
+                    </button>
                     <a href="https://account.mongodb.com/account/login">Sign in</a>
                 </ButtonsContainer>           
             </AtlasForm>
