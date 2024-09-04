@@ -13,7 +13,7 @@ const FormContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 24px;
-    padding: 24px;
+    padding: 40px 48px 40px 48px
 `;
 
 const FormTitle = styled.h4`
@@ -30,8 +30,8 @@ const FormTitle = styled.h4`
 const FormSubtitle = styled.span`
     margin: 0;
     color: #023430;
-    font-family: Euclid Circular A;
-    font-size: 16px;
+    font-family: EuclidCircularA;
+    font-size: 18px;
     line-height: 32px;
     grid-column: 2 / span 4;
     font-weight: 400;
@@ -49,7 +49,7 @@ const AtlasForm = styled.form`
 
 const GoogleSignUpContainer = styled.div`
     grid-column: span 12;
-    font-family: Euclid Circular A;
+    font-family: EuclidCircularA;
     font-size: 16px;
     font-weight: 500;
     border-radius: 4px;
@@ -100,7 +100,7 @@ const PasswordField = styled(PlainField)``;
 const ErrorLabel = styled.span`
     display: inline-block;
     margin: 8px 0px 0px 24px;
-    font-family: "Euclid Circular A";
+    font-family: "EuclidCircularA";
     font-size: 14px;
     line-height: 20px;
     color: #001E2B;
@@ -124,7 +124,7 @@ const ButtonsContainer = styled.div`
     button {
         width: 100%;
         padding: 16px 32px 16px 32px;
-        font-family: Euclid Circular A;
+        font-family: EuclidCircularA;
         font-size: 16px;
         font-weight: 500;
         border-radius: 4px;
@@ -146,7 +146,7 @@ const ButtonsContainer = styled.div`
 
     a {
         text-decoration: none;
-        font-family: Euclid Circular A;
+        font-family: EuclidCircularA;
         display: block;
         margin-top: 40px;
         font-weight: Bold;

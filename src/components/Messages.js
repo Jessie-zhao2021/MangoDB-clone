@@ -9,7 +9,7 @@ const MessageContainer = styled.div`
     max-width:500px;
     margin: 0 auto; 
     font-size: 14px;
-    /* width: 565px; */
+    font-family: EuclidCircularA;
     
     border-radius: 16px;
     display: flex;

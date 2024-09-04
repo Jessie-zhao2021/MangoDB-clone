@@ -15,11 +15,11 @@ const CopyRight = styled.span`
     line-height: 16px;
     flex: 1;
     color: #fff;
-    font-family: Euclid Circular A;
+    font-family: EuclidCircularA;
 `;
 
 const Link = styled.a`
-    font-family: Euclid Circular A;
+    font-family: EuclidCircularA;
     font-weight: 500;
     cursor: pointer;
     text-decoration: none;
